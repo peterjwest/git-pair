@@ -10,7 +10,7 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/peterjwest/git-users.git"
+    "url": "https://github.com/peterjwest/git-pair.git"
   },
   "keywords": [
     "git",
@@ -19,9 +19,9 @@
   "author": "Peter West",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/peterjwest/git-users/issues"
+    "url": "https://github.com/peterjwest/git-pair/issues"
   },
-  "homepage": "https://github.com/peterjwest/git-users",
+  "homepage": "https://github.com/peterjwest/git-pair",
   "bin": {
     "gitp": "git.js"
   },

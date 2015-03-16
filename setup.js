@@ -9,5 +9,5 @@ if (action === 'install') {
 }
 
 if (action === 'uninstall') {
-	childProcess.exec("git config --global --unset alias.users");
+    childProcess.exec("git config --global --unset alias.users");
 }

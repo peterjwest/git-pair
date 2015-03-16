@@ -17,36 +17,36 @@ function handleError(next, cb) {
 
 // Run GIT with additional env variables
 authorEnvVars(function (err, env) {
-	childProcess.spawn('git', process.argv.slice(2), {stdio: "inherit", env: env});
+    childProcess.spawn('git', process.argv.slice(2), {stdio: "inherit", env: env});
 });
 
 // Gets the environment variables for the author, if set
 function authorEnvVars(next) {
-	getUsers(function (err, users) {
-	    if (users.length == 2) {
-	    	return getLastAuthor(function(err, author) {
-	    		if (author === users[1].name) {
-	    			users = _(users).reverse().value();
-	    		}
-	    		var env = {
-			    	GIT_COMMITTER_NAME: users[0].name,
-			    	GIT_COMMITTER_EMAIL: users[0].email,
-			    	GIT_AUTHOR_NAME: users[1].name,
-			    	GIT_AUTHOR_EMAIL: users[1].email
-		    	};
-		    	return next(null, _.assign(env, process.env));
-	    	});
+    getUsers(function (err, users) {
+        if (users.length == 2) {
+            return getLastAuthor(function(err, author) {
+                if (author === users[1].name) {
+                    users = _(users).reverse().value();
+                }
+                var env = {
+                    GIT_COMMITTER_NAME: users[0].name,
+                    GIT_COMMITTER_EMAIL: users[0].email,
+                    GIT_AUTHOR_NAME: users[1].name,
+                    GIT_AUTHOR_EMAIL: users[1].email
+                };
+                return next(null, _.assign(env, process.env));
+            });
 
-	    }
-	    next(null, process.env);
-	});
+        }
+        next(null, process.env);
+    });
 }
 
 // Gets the author of the last commit
 function getLastAuthor(next) {
-	childProcess.exec('git --no-pager show -s --format=\'%an\'', handleError(next, function (author) {
-		next(null, author.trim());
-	}));
+    childProcess.exec('git --no-pager show -s --format=\'%an\'', handleError(next, function (author) {
+        next(null, author.trim());
+    }));
 }
 
 // Gets the user and author data from git
