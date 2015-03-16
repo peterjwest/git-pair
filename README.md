@@ -9,8 +9,8 @@ Allows you to commit with two users by making one the committer and the other th
 	npm install git-pair -g
 
 This installs:
-- An executable `gitp`
-- A git alias `git users`
+- A git alias [`git users`](#git-users)
+- An executable [`gitp`](#gitp)
 
 
 ## Quickstart
@@ -42,4 +42,4 @@ Simply use it as you would use git e.g. `gitp commit -m "Fixed the thing"`
 
 ### Aliasing
 
-You can also alias this over `git` to use this in place of git. I prefer this because it prevents people from accidentally committing with a single user. Simply add `alias git='gitp'` to `~/.bashrc` (or `~/.bash_profile` on Mac).
+You can also alias this over `git` to use this in place of it. I prefer this because it prevents people from accidentally committing with a single user. Simply add `alias git='gitp'` to `~/.bashrc` (or `~/.bash_profile` on Mac).
