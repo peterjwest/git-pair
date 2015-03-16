@@ -4,7 +4,7 @@
 Allows you to commit with two users by making one the committer and the other the author. Also lets you switch users easily.
 
 
-## Install:
+## Install
 
 	npm install git-pair -g
 
@@ -21,7 +21,9 @@ Configure the users for your pair with `git users`, then use `gitp` instead of `
 	gitp commit -m "Did the code"
 
 
-## git users
+## Components
+
+### git users
 
 This allows you to get or set git users. You can find out which users are configured using `git users`.
 You can set one or two users by providing their github emails as arguments: `git users email@example.com email2@example.com`.
@@ -33,13 +35,13 @@ The first user entered is set as the normal git user, this user is used by norma
 The second user is set as custom values in the git global config `author.email` and `author.name`.
 
 
-## gitp
+### gitp
 
 `gitp` is a wrapper executable for `git` which injects git committer and author environment variables to the command to allow two people to contribute to a commit. It alternates the committer and author in each commit.
 
 Simply use it as you would use git e.g. `gitp commit -m "Fixed the thing"`
 
 
-### Aliasing
+#### Aliasing
 
 You can also alias this over `git` to use this in place of it. I prefer this because it prevents people from accidentally committing with a single user. Simply add `alias git='gitp'` to `~/.bashrc` (or `~/.bash_profile` on Mac).
