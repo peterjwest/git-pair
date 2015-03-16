@@ -1,0 +1,32 @@
+{
+  "name": "git-pair",
+  "version": "0.0.1",
+  "description": "Git pair programming tools",
+  "main": "git.js",
+  "dependencies": {
+    "async": "0.9.0",
+    "lodash": "3.5.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/peterjwest/git-users.git"
+  },
+  "keywords": [
+    "git",
+    "pair-programming"
+  ],
+  "author": "Peter West",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/peterjwest/git-users/issues"
+  },
+  "homepage": "https://github.com/peterjwest/git-users",
+  "bin": {
+    "gitp": "git.js"
+  },
+  "scripts": {
+    "install" : "./setup.js install",
+    "uninstall": "./setup.js uninstall"
+  }
+}
