@@ -21,7 +21,7 @@ gitConfig.get('git-pair.scope', function(err, scope) {
 
     // If any emails have been specified, set git users
     if (emails.length) {
-        if (emails.length > 2) return console.error('Cannot use more than 2 users')
+        if (emails.length > 2) return console.error('Error: Cannot use more than 2 users');
 
         // Get usernames from github
         async.map(emails, requestGitUsername, function (err, usernames) {
@@ -41,7 +41,7 @@ gitConfig.get('git-pair.scope', function(err, scope) {
     // Otherwise get git users
     else {
         gitConfig.getUsers(scope, types, function(err, users) {
-            if (err) return console.error("Couldn't read git config");
+            if (err) return console.error("Error: Couldn't read git config");
 
             console.log('Configured users:');
             users.forEach(function(user) {
@@ -56,7 +56,7 @@ function requestGitUsername(email, next) {
     var options = {
         hostname: 'api.github.com',
         path: '/search/users?q=' + email + '+in:email',
-        headers: {'User-Agent': 'Node server'}
+        headers: {'User-Agent': 'Node'}
     };
     var req = https.request(options, function(res) {
         var json = '';
@@ -67,11 +67,11 @@ function requestGitUsername(email, next) {
             var data = JSON.parse(json);
 
             if (data.message && data.message.match(/^API rate limit exceeded/)) {
-                return next('API rate limit exceeded');
+                return next('Error: Github API rate limit exceeded');
             }
 
-            if (data.items.length !== 1) {
-                return next('Email account registered to ' + data.items.length + ' users');
+            if (data.items.length === 0) {
+                return next('Error: Email account is not a public email account for a Github user');
             }
 
             next(null, data.items[0].login);
