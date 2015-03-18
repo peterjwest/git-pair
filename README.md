@@ -3,6 +3,8 @@
 
 Allows you to commit with two users by making one the committer and the other the author. Also lets you switch users easily.
 
+Credit to @roylines for the original idea in his [gits](https://github.com/roylines/gits) repo.
+
 
 ## Install
 
@@ -11,6 +13,17 @@ Allows you to commit with two users by making one the committer and the other th
 This installs:
 - A git alias [`git users`](#git-users)
 - An executable [`gitp`](#gitp)
+
+
+### Local install
+
+You can also install git-pair locally:
+
+	npm install git-pair
+
+This will install the git alias to the local git config, to use gitp you need to run:
+
+	./node_modules/.bin/gitp
 
 
 ## Quickstart
@@ -45,3 +58,4 @@ Simply use it as you would use git e.g. `gitp commit -m "Fixed the thing"`
 #### Aliasing
 
 You can also alias this over `git` to use this in place of it. I prefer this because it prevents people from accidentally committing with a single user. Simply add `alias git='gitp'` to `~/.bashrc` (or `~/.bash_profile` on Mac).
+
