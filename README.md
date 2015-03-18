@@ -38,8 +38,13 @@ Configure the users for your pair with `git users`, then use `gitp` instead of `
 
 ### git users
 
-This allows you to get or set git users. You can find out which users are configured using `git users`.
-You can set one or two users by providing their github emails as arguments: `git users email@example.com email2@example.com`.
+This allows you to get or set git users. You can find out which users are configured using:
+
+	git users
+
+You can set one or two users by providing their github emails as arguments:
+
+	git users email@example.com email2@example.com
 
 Currently this only works with github accounts which have public email addresses, I plan to add an option for other users.
 
