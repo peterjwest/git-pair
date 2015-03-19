@@ -8,7 +8,7 @@ Credit to @roylines for the original idea in his [gits](https://github.com/royli
 
 ## Install
 
-	npm install git-pair -g
+    npm install git-pair -g
 
 This installs:
 - A git alias [`git users`](#git-users)
@@ -19,19 +19,19 @@ This installs:
 
 You can also install git-pair locally:
 
-	npm install git-pair
+    npm install git-pair
 
 This will install the git alias to the local git config, to use gitp you need to run:
 
-	./node_modules/.bin/gitp
+    ./node_modules/.bin/gitp
 
 
 ## Quickstart
 
 Configure the users for your pair with `git users`, then use `gitp` instead of `git`:
 
-	git users jane@example.com bob@example.com
-	gitp commit -m "Did the code"
+    git users jane@example.com bob@example.com
+    gitp commit -m "Did the code"
 
 
 ## Components
@@ -41,15 +41,15 @@ Configure the users for your pair with `git users`, then use `gitp` instead of `
 This alias allows you to get or set git users.
 You can find out which users are currently configured using:
 
-	git users
+    git users
 
 You can set users using their email addresses:
 
-	git users jane@example.com bob@example.com
+    git users jane@example.com bob@example.com
 
 This looks up git usernames from GitHub, alternatively you can specify usernames explicitly:
 
-	git users jane:jane@example.com bob:bob@example.com
+    git users jane:jane@example.com bob:bob@example.com
 
 The users are stored as values in `git config`. The first user entered is always the normal git user.
 
