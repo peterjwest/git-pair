@@ -50,7 +50,7 @@ gitConfig.get('git-pair.scope', function (err, scope) {
                 if (err) return console.error(err);
                 gitConfig.setUsers(scope, users, function (err) {
                     if (err) return console.error(err);
-                    console.log('Set users to: ' + usernames.join(' and '));
+                    console.log('Set users to: '+usernames.join(' and '));
                 });
             });
         });
@@ -58,12 +58,12 @@ gitConfig.get('git-pair.scope', function (err, scope) {
 
     // Otherwise get git users
     else {
-        gitConfig.getUsers(scope, types, function(err, users) {
+        gitConfig.getUsers(scope, types, function (err, users) {
             if (err) return console.error("Error: Couldn't read git config");
 
             console.log('Configured users:');
-            users.forEach(function(user) {
-                console.log(user.name + ' <' + user.email + '>');
+            users.forEach(function (user) {
+                console.log(user.name+' <'+user.email+'>');
             });
         });
     }
@@ -73,15 +73,15 @@ gitConfig.get('git-pair.scope', function (err, scope) {
 function requestGitUsername(email, next) {
     var options = {
         hostname: 'api.github.com',
-        path: '/search/users?q=' + email + '+in:email',
+        path: '/search/users?q='+email+'+in:email',
         headers: {'User-Agent': 'Node'}
     };
-    var req = https.request(options, function(res) {
+    var req = https.request(options, function (res) {
         var json = '';
-        res.on('data', function(chunk) {
+        res.on('data', function (chunk) {
             json += chunk;
         });
-        res.on('end', function() {
+        res.on('end', function () {
             var data = JSON.parse(json);
 
             if (data.message && data.message.match(/^API rate limit exceeded/)) {

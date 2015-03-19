@@ -17,14 +17,14 @@ authorEnvVars(function (err, env) {
 // Gets the environment variables for the author, if set
 function authorEnvVars(next) {
     // Gets the installed scope for git-pair (global or local)
-    gitConfig.get('git-pair.scope', handleError(next, function(scope) {
+    gitConfig.get('git-pair.scope', handleError(next, function (scope) {
         if (scope !== 'global' && scope !== 'local') {
             return next('git-pair not installed correctly');
         }
 
         gitConfig.getUsers(scope, types, function (err, users) {
             if (users.length == 2) {
-                return getLastAuthor(function(err, author) {
+                return getLastAuthor(function (err, author) {
                     if (author === users[1].name) {
                         users = _(users).reverse().value();
                     }
