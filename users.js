@@ -11,29 +11,47 @@ var gitConfig = require('./lib/git-config');
 var types = ['user', 'author'];
 
 // Parse command line input
-var emails = process.argv.slice(2);
+var inputs = process.argv.slice(2);
 
 // Gets the installed scope for git-pair (global or local)
-gitConfig.get('git-pair.scope', function(err, scope) {
+gitConfig.get('git-pair.scope', function (err, scope) {
     if (scope !== 'global' && scope !== 'local') {
-        return next('git-pair not installed correctly');
+        return console.error('Error: git-pair not installed correctly, please reinstall');
     }
 
-    // If any emails have been specified, set git users
-    if (emails.length) {
-        if (emails.length > 2) return console.error('Error: Cannot use more than 2 users');
+    // If any users have been specified, set git users
+    if (inputs.length) {
+        if (inputs.length > 2) return console.error('Error: Cannot use more than 2 users');
 
         // Get usernames from github
-        async.map(emails, requestGitUsername, function (err, usernames) {
+        async.map(inputs, function (input, next) {
+            var parts = input.split(':');
+
+            if (parts.length == 1) {
+                return requestGitUsername(input, next);
+            }
+            if (parts.length == 2) {
+                return next(null, parts[0]);
+            }
+            next('Error: '+input+' should use the format username:email');
+
+        }, function (err, usernames) {
             if (err) return console.error(err);
 
-            var users = types.map(function(type, i) {
-                return { name: usernames[i], email: emails[i], type: type };
-            })
+            var users = inputs.map(function (input, i) {
+                return { name: usernames[i], email: _.last(input.split(':')), type: types[i] };
+            });
 
-            gitConfig.setUsers(scope, users, function(err) {
+            // Detect invalid users
+            if (_.any(users, function (user) { return !user.name || !user.email; })) {
+                return console.error('Error: invalid user '+user.name+':'+user.email);
+            }
+            gitConfig.clearUsers(scope, types, function (err) {
                 if (err) return console.error(err);
-                console.log('Set users to: ' + usernames.join(' and '));
+                gitConfig.setUsers(scope, users, function (err) {
+                    if (err) return console.error(err);
+                    console.log('Set users to: ' + usernames.join(' and '));
+                });
             });
         });
     }

@@ -30,7 +30,7 @@ This will install the git alias to the local git config, to use gitp you need to
 
 Configure the users for your pair with `git users`, then use `gitp` instead of `git`:
 
-	git users email@example.com email2@example.com
+	git users jane@example.com bob@example.com
 	gitp commit -m "Did the code"
 
 
@@ -38,19 +38,20 @@ Configure the users for your pair with `git users`, then use `gitp` instead of `
 
 ### git users
 
-This allows you to get or set git users. You can find out which users are configured using:
+This alias allows you to get or set git users.
+You can find out which users are currently configured using:
 
 	git users
 
-You can set one or two users by providing their github emails as arguments:
+You can set users using their email addresses:
 
-	git users email@example.com email2@example.com
+	git users jane@example.com bob@example.com
 
-Currently this only works with github accounts which have public email addresses, I plan to add an option for other users.
+This looks up git usernames from GitHub, alternatively you can specify usernames explicitly:
 
-The first user entered is set as the normal git user, this user is used by normal git commands and stored in the git global config as `user.name` and `user.email`.
+	git users jane:jane@example.com bob:bob@example.com
 
-The second user is set as custom values in the git global config `author.email` and `author.name`.
+The users are stored as values in `git config`. The first user entered is always the normal git user.
 
 
 ### gitp
