@@ -13,5 +13,5 @@ if (action === 'install') {
 
 if (action === 'uninstall') {
     childProcess.exec("git config --"+scope+" --unset alias.users");
-    childProcess.exec("git config --"+scope+" --unset git-pair.scope");
+    childProcess.exec("git config --"+scope+" --remove-section git-pair");
 }
