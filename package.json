@@ -1,6 +1,6 @@
 {
   "name": "git-pair",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Git pair programming tools",
   "main": "git.js",
   "dependencies": {
