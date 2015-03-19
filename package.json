@@ -7,7 +7,10 @@
     "async": "0.9.0",
     "lodash": "3.5.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-jscs": "^1.4.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/peterjwest/git-pair.git"
@@ -26,7 +29,7 @@
     "gitp": "git.js"
   },
   "scripts": {
-    "install" : "./setup.js install",
+    "install": "./setup.js install",
     "uninstall": "./setup.js uninstall"
   }
 }
