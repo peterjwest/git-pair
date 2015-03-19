@@ -10,21 +10,21 @@ var gitConfig = require('./lib/git-config');
 var types = ['user', 'author'];
 
 // Run GIT with additional env variables
-authorEnvVars(function (err, env) {
-    childProcess.spawn('git', process.argv.slice(2), {stdio: "inherit", env: env});
+authorEnvVars(function(err, env) {
+    childProcess.spawn('git', process.argv.slice(2), { stdio: 'inherit', env: env });
 });
 
 // Gets the environment variables for the author, if set
 function authorEnvVars(next) {
     // Gets the installed scope for git-pair (global or local)
-    gitConfig.get('git-pair.scope', handleError(next, function (scope) {
+    gitConfig.get('git-pair.scope', handleError(next, function(scope) {
         if (scope !== 'global' && scope !== 'local') {
             return next('git-pair not installed correctly');
         }
 
-        gitConfig.getUsers(scope, types, function (err, users) {
+        gitConfig.getUsers(scope, types, function(err, users) {
             if (users.length == 2) {
-                return getLastAuthor(function (err, author) {
+                return getLastAuthor(function(err, author) {
                     if (author === users[1].name) {
                         users = _(users).reverse().value();
                     }
@@ -45,7 +45,7 @@ function authorEnvVars(next) {
 
 // Gets the author of the last commit
 function getLastAuthor(next) {
-    childProcess.exec('git --no-pager show -s --format=\'%an\'', handleError(next, function (author) {
+    childProcess.exec('git --no-pager show -s --format=\'%an\'', handleError(next, function(author) {
         next(null, author.trim());
     }));
 }
