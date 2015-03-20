@@ -7,7 +7,7 @@ var action = process.argv[2];
 var scope = process.env.npm_config_global ? 'global' : 'local';
 
 if (action === 'install') {
-    childProcess.exec('git config --' + scope + ' alias.users ' + __dirname + '/users.js');
+    childProcess.exec('git config --' + scope + ' alias.users \\!' + __dirname + '/users.js');
     childProcess.exec('git config --' + scope + ' git-pair.scope ' + scope);
 }
 
