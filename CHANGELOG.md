@@ -1,3 +1,7 @@
+# 0.1.2
+
+- Fixed git alias in setup
+
 # 0.1.1
 
 - Added coding standards
