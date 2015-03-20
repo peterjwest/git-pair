@@ -1,3 +1,9 @@
+# 0.1.1
+
+- Added coding standards
+- Standardised project
+- Fixed syntax error
+
 # 0.1.0
 
 - Added support for local install
