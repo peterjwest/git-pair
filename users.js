@@ -3,7 +3,6 @@
 var https = require('https');
 var async = require('async');
 var _ = require('lodash');
-var childProcess = require('child_process');
 var handleError = require('./lib/handle-error');
 var gitConfig = require('./lib/git-config');
 
@@ -43,7 +42,7 @@ gitConfig.get('git-pair.scope', function(err, scope) {
             });
 
             // Detect invalid users
-            if (_.any(users, function(user) { return !user.name || !user.email; })) {
+            if (_.some(users, function(user) { return !user.name || !user.email; })) {
                 return console.error('Error: invalid user ' + user.name + ':' + user.email);
             }
             gitConfig.clearUsers(scope, types, function(err) {

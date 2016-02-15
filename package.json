@@ -2,10 +2,12 @@
   "name": "git-pair",
   "version": "0.1.2",
   "description": "Git pair programming tools",
-  "main": "git.js",
+  "main": "gitp.js",
   "dependencies": {
-    "async": "0.9.0",
-    "lodash": "3.6.0"
+    "async": "^1.5.2",
+    "cross-spawn-async": "^2.1.8",
+    "lodash": "^4.3.0",
+    "slash": "^1.0.0"
   },
   "devDependencies": {
     "gulp": "^3.8.11",
@@ -29,10 +31,10 @@
   },
   "homepage": "https://github.com/peterjwest/git-pair",
   "bin": {
-    "gitp": "git.js"
+    "gitp": "gitp.js"
   },
   "scripts": {
-    "install": "./setup.js install",
-    "uninstall": "./setup.js uninstall"
+    "install": "node setup.js install",
+    "uninstall": "node setup.js uninstall"
   }
 }
