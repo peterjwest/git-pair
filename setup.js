@@ -1,17 +1,44 @@
 #!/usr/bin/env node
 
-var childProcess = require('child_process');
+var async = require('async');
+var slash = require('slash');
+var path = require('path');
+var spawn = require('./lib/spawn');
 
 var action = process.argv[2];
 
 var scope = process.env.npm_config_global ? 'global' : 'local';
 
 if (action === 'install') {
-    childProcess.exec('git config --' + scope + ' alias.users \\!' + __dirname + '/users.js');
-    childProcess.exec('git config --' + scope + ' git-pair.scope ' + scope);
+    async.series([
+        function(cb) {
+            spawn('git', ['config', '--' + scope, 'alias.users', '!' + slash(path.resolve(__dirname, 'users.js'))], cb);
+        },
+        function(cb) {
+            spawn('git', ['config', '--' + scope, 'git-pair.scope', scope], cb);
+        }
+    ], function(err) {
+        if (err != null) {
+            console.error('Error installing git-pair: %s', err);
+        } else {
+            console.info('git-pair installed');
+        }
+    });
 }
 
 if (action === 'uninstall') {
-    childProcess.exec('git config --' + scope + ' --unset alias.users');
-    childProcess.exec('git config --' + scope + ' --remove-section git-pair');
+    async.series([
+        function(cb) {
+            spawn('git', ['config', '--' + scope, '--unset', 'alias.users'], cb);
+        },
+        function(cb) {
+            spawn('git', ['config', '--' + scope, '--remove-section', 'git-pair'], cb);
+        }
+    ], function(err) {
+        if (err != null) {
+            console.error('Error uninstalling git-pair: %s', err);
+        } else {
+            console.info('git-pair uninstalled');
+        }
+    });
 }

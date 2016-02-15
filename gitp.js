@@ -1,17 +1,16 @@
 #!/usr/bin/env node
 
-var async = require('async');
-var childProcess = require('child_process');
 var _ = require('lodash');
 var handleError = require('./lib/handle-error');
 var gitConfig = require('./lib/git-config');
+var spawn = require('./lib/spawn');
 
 // User types to set in git config
 var types = ['user', 'author'];
 
 // Run GIT with additional env variables
 authorEnvVars(function(err, env) {
-    childProcess.spawn('git', process.argv.slice(2), { stdio: 'inherit', env: env });
+    spawn('git', process.argv.slice(2), { stdio: 'inherit', env: env });
 });
 
 // Gets the environment variables for the author, if set
@@ -45,7 +44,7 @@ function authorEnvVars(next) {
 
 // Gets the author of the last commit
 function getLastAuthor(next) {
-    childProcess.exec('git --no-pager show -s --format=\'%an\'', handleError(next, function(author) {
+    spawn('git', ['--no-pager', 'show', '-s', '--format=%an'], handleError(next, function(author) {
         next(null, author.trim());
     }));
 }
